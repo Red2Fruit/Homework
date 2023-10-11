@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.19;
+
+contract Greeter {
+
+    string private strHold;
+
+    function takeIt(string memory str) public {
+        strHold = str;
+    } 
+    
+     function output() public view returns(string memory) {
+        return strHold;
+     }
+    
+}
+Делал с полярником И делали код ревью
