@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.19;
+
+contract Time {
+    uint sec = 4830;
+
+    function getTime(uint unix) public view returns (uint) {
+        uint time = block.timestamp;
+        if(unix > time)
+            return time + sec;
+        else 
+            return 0;
+    }
+    
+    
+}
