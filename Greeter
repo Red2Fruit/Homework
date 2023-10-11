@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 
 contract Greeter {
 
-    string private strHold;
+    string strHold;
 
     function takeIt(string memory str) public {
         strHold = str;
