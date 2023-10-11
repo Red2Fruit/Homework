@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.19;
+
+contract Owner {
+
+    address addHold;
+
+    function takeIt(address add) public {
+        addHold = add;
+    } 
+    
+     function output() public view returns(address) {
+        return addHold;
+     }
+    
+}
