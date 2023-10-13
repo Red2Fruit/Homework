@@ -2,19 +2,24 @@
 pragma solidity ^0.8.19;
 
 contract Test {
-  address[] public whitelist;
+    uint x;
+    address[] private whitelist;
 
-    function addPush(address add) public {
-           whitelist.push(add); 
-        
-        
+    function test() public view returns(uint) {
+        uint x = whitelist.length;
+        return x;
     }
 
-    function check(address add) public view returns (bool) {
-         for(uint i = 0; i < whitelist.length; i++){
-            if(whitelist[i] == add)
-            return true;
-         }
+    function addPush(address add) public {
+        whitelist.push(add);
+    }
+
+
+    function check(address chekingAdd) public view returns(bool){
+        for(uint i = 0; i < whitelist.length; i++){
+            if(whitelist[i] == chekingAdd)
+                return true;
+        }
         return false;
     }
 }
