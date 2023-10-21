@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.17; 
+
+contract Rent { 
+ 
+    address payable public Landlord; 
+    string public _Name; 
+    uint public _Age; 
+    string public _Occupation; 
+     
+    address private addContract; 
+ 
+    constructor (string memory name, uint age, string memory occupation) { 
+        _Name = name; 
+        _Age = age; 
+        _Occupation = occupation; 
+        Landlord = payable(msg.sender); 
+    } 
+  
+    receive() external payable { 
+        Landlord.transfer(msg.value); 
+    } 
+}
