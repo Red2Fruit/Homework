@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.17;
+
+contract Counter {
+    uint public namber;
+
+    function increase() external {
+        namber +=1;
+    }
+}
+
+
+contract CounterInteraction {
+     Counter public myCounter;
+
+    constructor(address counterAddress) {
+        myCounter = Counter(counterAddress);
+    }
+
+    function counterIncrement() external {
+        myCounter.increase();
+    }
+}
