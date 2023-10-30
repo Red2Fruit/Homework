@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.20;
 
-import "@openzeppelin/contracts/tocen/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ISO is Ownable{
@@ -28,7 +28,7 @@ contract ISO is Ownable{
     }
 
     function setRate(uint rate_) external onlyOwner{
-        require(rete_ > 0);
+        require(rate_ > 0);
         RATE = rate_;
     }
 
@@ -37,7 +37,7 @@ contract ISO is Ownable{
         TOKEN.transfer(owner(), getBalaceToken());
     }
 
-    function withdrawEther() external onleOwner{
+    function withdrawEther() external onlyOwner{
         require(getBalanceEther() > 0, "Not enough Ether!");
         payable(owner()).transfer(getBalanceEther());
     }
@@ -50,7 +50,7 @@ contract ISO is Ownable{
     }
 
     function sellTocen(uint _amount) external {
-        uint allowanceTocen = TOCEN.allowance(msg.sender, address(this));
+        uint allowanceTocen = TOKEN.allowance(msg.sender, address(this));
         uint valueEther = _amount * RATE;
         require(allowanceTocen > _amount, "Not approved tokens!");
         TOKEN.transferFrom(msg.sender, address(this), _amount);
