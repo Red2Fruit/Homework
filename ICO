@@ -1,0 +1,60 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity 0.8.20;
+
+import "@openzeppelin/contracts/tocen/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract ISO is Ownable{
+    IERC20 public TOKEN;
+    uint public RATE;
+
+    constructor(address _token, uint _rate, address _initialOwner) Ownable(_initialOwner){
+        TOKEN = IERC20(_token);
+        RATE = _rate;
+    }
+
+    function getBalaceToken() public view returns(uint balance){
+        balance = TOKEN.balanceOf(address(this));
+    }
+
+    function getBalanceEther() public view returns(uint balanceEther){
+        balanceEther = address(this).balance;
+    }
+
+    function setToken(address tocen_) external onlyOwner{
+        require(tocen_ != address(0));
+        TOKEN = IERC20(tocen_);
+    }
+
+    function setRate(uint rate_) external onlyOwner{
+        require(rete_ > 0);
+        RATE = rate_;
+    }
+
+    function withrdawToken() external onlyOwner{
+        require(getBalaceToken() > 0, "Not enough tokens!");
+        TOKEN.transfer(owner(), getBalaceToken());
+    }
+
+    function withdrawEther() external onleOwner{
+        require(getBalanceEther() > 0, "Not enough Ether!");
+        payable(owner()).transfer(getBalanceEther());
+    }
+
+    function bueTokens() external  payable {
+        require(msg.value > RATE, "Not enough Ether!");
+        uint valueTokens = msg.value / RATE;
+        require(getBalaceToken() >= valueTokens, "Not enough Ether!");
+        TOKEN.transfer(msg.sender, valueTokens);
+    }
+
+    function sellTocen(uint _amount) external {
+        uint allowanceTocen = TOCEN.allowance(msg.sender, address(this));
+        uint valueEther = _amount * RATE;
+        require(allowanceTocen > _amount, "Not approved tokens!");
+        TOKEN.transferFrom(msg.sender, address(this), _amount);
+        payable (msg.sender).transfer(valueEther);
+    }
+
+}
